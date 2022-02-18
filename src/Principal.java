@@ -4,33 +4,85 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
-        Controller controlador = new Controller();
+        PrincipalController controladorPrincipal = new PrincipalController();
+        StudentController controladorEstudiante = new StudentController();
+        ScoreController controladorNotas = new ScoreController();
         Scanner sc = new Scanner(System.in);
 
-        JOptionPane.showMessageDialog(null, "Biemvenido al sistema de gestion de notas y reportes");
-        controlador.menuGeneral();
-        while(sc.hasNext()){
-            System.out.println("sirvio");
-            String op = sc.next();
-            switch (op){
+        JOptionPane.showMessageDialog(null, "Bienvenido al sistema de gestion de notas y reportes");
+        boolean continua = true;
+        while(continua){
+
+            switch (controladorPrincipal.menuGeneral()){
                 case "1":
-                    controlador.crearNotas();
+                    boolean continua_e = true;
+                    while(continua_e){
+                        switch (controladorPrincipal.menuEstudiantes()) {
+                            case "1":
+                                controladorEstudiante.crearEstudiante();
+                                break;
+                            case "2":
+                                controladorEstudiante.listaEstudiantes();
+                                break;
+                            case "3":
+                                controladorEstudiante.buscarEstudiante();
+                                break;
+                            case "4":
+                                controladorEstudiante.modificarEstudiante();
+                                break;
+                            case "5":
+                                controladorEstudiante.borrarEstudiante();
+                                break;
+                            case "6":
+                                continua_e=false;
+                                break;
+                            case "7":
+                                continua_e = false;
+                                continua = false;
+                                break;
+                        }
+                        }
                     break;
                 case "2":
-                    controlador.constularNotas();
+                    controladorNotas.csv();
+                    boolean continua_n = true;
+                    while(continua_n){
+                        switch (controladorPrincipal.menuNotas()){
+                            case"1":
+                                controladorNotas.crearNota();
+                                break;
+                            case "2":
+                                break;
+                            case "3":
+                                break;
+                            case "4":
+                                break;
+                            case "5":
+                                break;
+                            case "6":
+                                continua_n = false;
+                                break;
+                            case "7":
+                                continua = false;
+                                continua_n = false;
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Opcion no valida");
+                        }
+
+                    }
                     break;
                 case "3":
-                    controlador.generarReporte();
+                    controladorPrincipal.menuReportes();
                     break;
                 case "4":
-                    controlador.consultarReporte();
-                case "5":
-                    controlador.exit();
+                    controladorPrincipal.exit();
+                    continua = false;
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Invalid option");
             }
-            controlador.menuGeneral();
+
         }
     }
 }
