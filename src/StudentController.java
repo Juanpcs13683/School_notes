@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class StudentController {
@@ -6,6 +9,14 @@ public class StudentController {
     private ArrayList<Student> lista_estudiantes = new ArrayList<>();
     /////// Menu Estudiantes
 
+
+    public ArrayList<Student> getLista_estudiantes() {
+        return lista_estudiantes;
+    }
+
+    public void setLista_estudiantes(ArrayList<Student> lista_estudiantes) {
+        this.lista_estudiantes = lista_estudiantes;
+    }
 
     // 1.1 Crear estudiantes
     public void crearEstudiante() {
@@ -37,13 +48,22 @@ public class StudentController {
 
         if (lista_estudiantes.size() > 0) {
             int x = 0;
-            for (Student estudiante : lista_estudiantes) {
-                x++;
-                JOptionPane.showMessageDialog(null, "Estudiante No. " + x + "\n" +
-                        "Nombre: " + estudiante.name + " " + estudiante.last_name + "\n" +
-                        "Edad: " + estudiante.age + "\n" +
-                        "Curso: " + estudiante.grade);
+            try {
+                File creadorEstudiantes = new File("src/estudiantes.txt");
+                PrintWriter escritor = new PrintWriter(creadorEstudiantes);
+                for (Student estudiante : lista_estudiantes) {
+                    x++;
+                    JOptionPane.showMessageDialog(null, "Estudiante No. " + x + "\n" +
+                            "Nombre: " + estudiante.name + " " + estudiante.last_name + "\n" +
+                            "Edad: " + estudiante.age + "\n" +
+                            "Curso: " + estudiante.grade);
+                    escritor.println(estudiante.name + " " + estudiante.last_name);
+                }
+                escritor.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Archivo no creado");
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "no se encontro registro de estudiantes");
         }

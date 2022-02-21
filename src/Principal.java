@@ -37,19 +37,20 @@ public class Principal {
                                 continua_e=false;
                                 break;
                             case "7":
-                                continua_e = false;
-                                continua = false;
+                                controladorPrincipal.exit();
+                                System.exit(0);
                                 break;
                         }
                         }
                     break;
                 case "2":
-                    controladorNotas.csv();
+
                     boolean continua_n = true;
                     while(continua_n){
                         switch (controladorPrincipal.menuNotas()){
                             case"1":
-                                controladorNotas.crearNota();
+                               // llamamos metodo de seleccion de materia
+                                controladorNotas.crearNotas();
                                 break;
                             case "2":
                                 break;
@@ -63,8 +64,8 @@ public class Principal {
                                 continua_n = false;
                                 break;
                             case "7":
-                                continua = false;
-                                continua_n = false;
+                                controladorPrincipal.exit();
+                                System.exit(0);
                                 break;
                             default:
                                 JOptionPane.showMessageDialog(null, "Opcion no valida");
