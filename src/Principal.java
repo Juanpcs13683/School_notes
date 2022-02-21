@@ -53,6 +53,7 @@ public class Principal {
                                 controladorNotas.crearNotas();
                                 break;
                             case "2":
+                                controladorNotas.listarNotas();
                                 break;
                             case "3":
                                 break;

@@ -80,7 +80,59 @@ public class ScoreController {
         }
     }
 
+//2.2 listarNotas
+    //submetodo para buscar la lista
+    public void buscaLista(String nombreMateria){
+        ArrayList<String> lista_lineas = new ArrayList<>();
+        try {
+            File archivo = new File("src/Notas/" +nombreMateria+".csv");
+            sc = new Scanner(archivo);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while(sc.hasNext()){
+            lista_lineas.add(sc.nextLine());
+        }
+        lista_lineas.remove(0);
 
+        for (String linea: lista_lineas) {
+            String[] separado = linea.split(",");
+           JOptionPane.showMessageDialog(null, "Lista de Notas de "+separado[1]+"\n"+
+                   "Estudiante: "+separado[0]+"\n"+"Nota 1: "+separado[2]+"\n"+"Nota 2: "+separado[3]+"\n"+
+                   "Nota 3: " +separado[4]+"\n"+"Nota 4: "+separado[5]+"\n"+"Definitiva: "+separado[6]);
+        }
+
+    }
+
+    public void listarNotas(){
+        String nombreMateria= "";
+        while (nombreMateria==""){
+            switch (JOptionPane.showInputDialog(null, "Listar Notas\n"+
+                    "Por favor selecione una de las siguientes materias:" +"\n"+
+                    "1. Matematicas\n"+"2. Fisica"+"\n"+"3. Español\n"+"4. Sociales")){
+                case "1":
+                    nombreMateria = "Matematicas";
+                    buscaLista(nombreMateria);
+                    break;
+                case "2":
+                    nombreMateria = "Fisica";
+                    buscaLista(nombreMateria);
+                    break;
+                case "3":
+                    nombreMateria = "Español";
+                    buscaLista(nombreMateria);
+                    break;
+                case "4":
+                    nombreMateria = "Sociales";
+                    buscaLista(nombreMateria);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opvion invalida");
+            }
+        }
+
+
+    }
 
 
 
