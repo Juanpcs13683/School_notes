@@ -134,8 +134,78 @@ public class ScoreController {
 
     }
 
+//3.3 buscaNotaEstudiante
+public void buscaNota(String nombreMateria, String nombreEstudiante){
+        ArrayList<String> lista_lineas = new ArrayList<>();
+    try {
+        File archivo = new File("src/Notas/"+nombreMateria+".csv");
+        sc = new Scanner(archivo);
+    } catch (FileNotFoundException e) {
+       JOptionPane.showMessageDialog(null, "Error al cargar archivo");
+    }
+    //agregamos la cada linea en una posicion de el arreglo
+    while(sc.hasNext()){
+        lista_lineas.add(sc.nextLine());
+    }
+    lista_lineas.remove(0);
+    for (String nombre: lista_lineas) {
+        String[] separados = nombre.split(",");
+        String[] name = separados[0].split(" ");
+        if(nombreEstudiante.equalsIgnoreCase(name[0])){
+            JOptionPane.showMessageDialog(null, "Materia: "+separados[1]+"\n"+
+                    "Estudiante: "+separados[0]+"\n"+"Nota 1: "+separados[2]+"\n"+
+                    "Nota 2: "+separados[3]+"\n"+"Nota 3: "+separados[4]+"\n"+
+                    "Nota 4: "+separados[5]+"\n"+"Definitiva: "+separados[6]);
+        }
+    }
+}
+public void buscaNotaEstudiante(){
+        String nombreMateria="";
+        String nombre;
+        switch (JOptionPane.showInputDialog(null, "Listar Notas\n"+
+                "Por favor selecione una de las siguientes materias:" +"\n"+
+                "1. Matematicas\n"+"2. Fisica"+"\n"+"3. Español\n"+"4. Sociales")){
+            case "1":
+                nombreMateria = "Matematicas";
+                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                if(nombre.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
+                }else {
+                    buscaNota(nombreMateria, nombre);
+                }
+                break;
+            case "2":
+                nombreMateria = "Fisica";
+                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                if(nombre.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
+                }else {
+                    buscaNota(nombreMateria, nombre);
+                }
+                break;
+            case "3":
+                nombreMateria = "Español";
+                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                if(nombre.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
+                }else {
+                    buscaNota(nombreMateria, nombre);
+                }
+                break;
+            case "4":
+                nombreMateria = "Sociales";
+                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                if(nombre.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
+                }else {
+                    buscaNota(nombreMateria, nombre);
+                }
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Opvion invalida");
+        }
 
-
+}
 
 
 

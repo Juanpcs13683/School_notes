@@ -56,6 +56,7 @@ public class Principal {
                                 controladorNotas.listarNotas();
                                 break;
                             case "3":
+                                controladorNotas.buscaNotaEstudiante();
                                 break;
                             case "4":
                                 break;
