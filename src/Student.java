@@ -4,14 +4,39 @@
  */
 public class Student {
 
+    /**
+     * Atributo tipo String que representa el nombre de un estudiante.
+     */
     public String name;
+
+    /**
+     * Atributo tipo String que representa el apellido de un estudiante.
+     */
     public String last_name;
+
+    /**
+     * Atributo tipo int que representa la edad del estudiante.
+     */
     public int age;
+
+    /**
+     * Atributo tipo int que representa el curso en que se encuentra el estudiante.
+     */
     public int grade;
 
+    /**
+     * Metodo constructor que permite instanciar la clase sin inicializar sus atributos.
+     */
     public Student() {
     }
 
+    /**
+     * Metodo constructor que permite instanciar la clasae inicializando cada uno de sus atributos.
+     * @param name Nombre del estudiante.
+     * @param last_name Apellido del estudiante.
+     * @param age Edad del estudiante.
+     * @param grade Curso del estudiante.
+     */
     public Student(String name, String last_name, int age, int grade) {
         this.name = name;
         this.last_name = last_name;
@@ -19,35 +44,5 @@ public class Student {
         this.grade = grade;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
 }

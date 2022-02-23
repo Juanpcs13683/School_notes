@@ -4,21 +4,24 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * Clase controlador en la cual se hace el CRUD referente a la informacion de los estudiantes.
+ * @author juanpcs
+ */
 public class StudentController {
 
+    /**
+     * Arreglo dinamico que almacena los estudiantes y sus datos personales.
+     */
     private ArrayList<Student> lista_estudiantes = new ArrayList<>();
     /////// Menu Estudiantes
 
 
-    public ArrayList<Student> getLista_estudiantes() {
-        return lista_estudiantes;
-    }
-
-    public void setLista_estudiantes(ArrayList<Student> lista_estudiantes) {
-        this.lista_estudiantes = lista_estudiantes;
-    }
-
     // 1.1 Crear estudiantes
+
+    /**
+     * Metodo para crear un objeto de tipo Student.
+     */
     public void crearEstudiante() {
         JOptionPane.showMessageDialog(null, "Creacion de Estudiante\n" +
                 "Inserte los datos a continuacion \n\n");
@@ -44,6 +47,10 @@ public class StudentController {
     }
 
     //1.2 Lista Estudiantes
+
+    /**
+     * Metodo para listar los estudiantes existentes en el arreglo lista_estudiantes.
+     */
     public void listaEstudiantes() {
 
         if (lista_estudiantes.size() > 0) {
@@ -70,6 +77,10 @@ public class StudentController {
     }
 
     //1.3 Buscar Estudiante
+
+    /**
+     * Metodo para buscar un estudiante especifico en el arreglo lista_estudiantes.
+     */
     public void buscarEstudiante() {
         String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre del estudiante");
         for (Student estudiante : lista_estudiantes) {
@@ -88,6 +99,10 @@ public class StudentController {
 
 
     //1.4 Modificar Estudiante
+
+    /**
+     * Metodo para sobreescribir la infomacion de un estudiante especifico del arreglo lista_estudiantes.
+     */
     public void modificarEstudiante() {
         String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre del estudiante a reemplazar");
         for (Student estudiante : lista_estudiantes) {
@@ -112,6 +127,10 @@ public class StudentController {
     }
 
     //1.5 Borrar Estudiante
+
+    /**
+     * Metodo para borrar un estudiante especifico del arreglo lista_estudiantes.
+     */
     public void borrarEstudiante() {
         String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre del Estudiante a borrar");
         for (Student estudiante : lista_estudiantes) {

@@ -1,19 +1,43 @@
 import javax.swing.*;
 import java.util.Scanner;
 
-
+/**
+ * Clase principal que cumple la funcion de vista e interactura con el usuario.
+ */
 public class Principal {
     public static void main(String[] args) {
-        PrincipalController controladorPrincipal = new PrincipalController();
-        StudentController controladorEstudiante = new StudentController();
-        ScoreController controladorNotas = new ScoreController();
-        ReportController controladorReportes = new ReportController();
-        Scanner sc = new Scanner(System.in);
 
+        /**
+         * Instancia del controlador principal.
+         */
+        PrincipalController controladorPrincipal = new PrincipalController();
+
+        /**
+         * Instancia del controlador del modulo estudiante.
+         */
+        StudentController controladorEstudiante = new StudentController();
+
+        /**
+         * Instancia del controlador del modulo de notas.
+         */
+        ScoreController controladorNotas = new ScoreController();
+
+        /**
+         * Instancia del controlador del modulo de reportes.
+         */
+        ReportController controladorReportes = new ReportController();
+
+        /**
+         * Mensaje de biembenida al ingreso del programa.
+          */
         JOptionPane.showMessageDialog(null, "Bienvenido al sistema de gestion de notas y reportes");
         boolean continua = true;
-        while(continua){
 
+        /**
+         * El siguiente fragmento de codigo se encarga de brindar al usuario las diferentes opciones, y a partir de las mismas
+         * hace un llamado a el controlador de cada modulo y sus metodos.
+         */
+        while(continua){
             switch (controladorPrincipal.menuGeneral()){
                 case "1":
                     boolean continua_e = true;

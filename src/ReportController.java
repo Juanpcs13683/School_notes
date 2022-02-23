@@ -4,10 +4,25 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Clase controlador que gestiona el modulo de reportes que se encarga de listar y buscar los reportes de los estudiantes existentes.
+ * @author juanpcs
+ */
 public class ReportController {
 
+    /**
+     * Instancia vacia del objeto Scanner.
+     */
     Scanner sc = null;
     //Metodo para seleccion de materia
+
+    /**
+     * Metodo que busca la nota definitiva de el estudiante y materia requeridos y la retorna de existir,
+     * en caso contrario retorna la nota como "0".
+     * @param nombreEstudiante Nombre del estudiante a buscar.
+     * @param nombreMateria Materia a buscar.
+     * @return Nota definitiva de la materia, en caso de no encontrarla retorna "0" para dicha materia.
+     */
     private String buscaNotas(String nombreEstudiante,String nombreMateria){
         String notaDefinitiva = "0";
         try {
@@ -36,6 +51,12 @@ public class ReportController {
     }
 
     //3.1 Lista reportes
+
+    /**
+     * Metodo que se llama al metodo de buscar notas, pasando como parametros los nombres almacenados
+     * y el nombre de cada materia, en caso de tener "0" en todas las materias, imprime que no existen notas,
+     * de lo contrario imprime las notas encontradas.
+     * */
     public void listaReportes() {
 
         try {
@@ -69,6 +90,11 @@ public class ReportController {
     }
 
     //3.2 Buscar reporte
+
+    /**
+     * Metodo que invoca al metodo de buscarNotas pasando como parametro un nombre que se pide al usuario por consola,
+     * y buscando asi coincidencias en cada una de las materias, en caso de  no encotrar imprime la no existencia de notas.
+     */
     public void buscaReporte(){
         String nombre = JOptionPane.showInputDialog(null, "Buscar Reporte\n"+
                 "Ingrese nombre completo del estudiante: ");

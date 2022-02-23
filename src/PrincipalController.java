@@ -1,13 +1,20 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Clase controlador del modulo principal que contiene los parametros que se muestran en la vista al usuario.
+ * @author juanpcs
+ */
 public class PrincipalController {
-
-
 
     //Seccion de menus
 
     //  metodo menu genearl
+
+    /**
+     * Metodo que muestra las opciones disponibles en el menu principal del programa.
+     * @return Menu principal.
+     */
     public String menuGeneral(){
         String menu = "******  Administrador de notas Escolares  ******\n\n"+
                 "Menu Principal\n"+
@@ -20,6 +27,11 @@ public class PrincipalController {
     }
 
     //1. menu de Estudiantes
+
+    /**
+     * Metodo que muestra diferentes opciones disponibles en el modulo estudiantes.
+     * @return Menu de opciones del modulo Estudiantes.
+     */
     public String menuEstudiantes(){
         return  JOptionPane.showInputDialog(null, "******  Estudiantes  ******\n"+
                 "1. Crear Estudiante\n"+
@@ -32,6 +44,11 @@ public class PrincipalController {
     }
 
     //2. Menu Notas
+
+    /**
+     * Metodo que muestra las opciones disponibles en el modulo de notas.
+     * @return Menu de opciones del modulo notas.
+     */
     public String menuNotas(){
         return JOptionPane.showInputDialog(null, "******  Notas ******\n"+
                 "1. Crear Notas\n"+
@@ -44,6 +61,11 @@ public class PrincipalController {
     }
 
     //3. menu Reportes
+
+    /**
+     * Metodo que muestra las opciones disponibles en el modulo de reportes.
+     * @return Menu de opciones del modulo reportes.
+     */
     public String menuReportes(){
         return JOptionPane.showInputDialog(null, "******  Reportes  *****\n"+
                 "1. Lista de Reportes\n"+
@@ -55,8 +77,13 @@ public class PrincipalController {
 
 
     // 5. metodo para salir
+
+    /**
+     * Metodo que permite finalizar el programa.
+     */
     public void exit(){
         JOptionPane.showMessageDialog(null, "******  Gracias por usar nuestro servicio  *******\n"+
                 " *** Bye ***");
+        System.exit(0);
     }
 }

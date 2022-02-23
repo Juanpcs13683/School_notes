@@ -5,19 +5,52 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Clase de tipo controlador que se encarga de gestionar el CRUD de notas para cada estudiante.
+ */
 public class ScoreController {
+
+    /**
+     *Instancia del objeto Scanner que se incializa vacia para luego ser usada.
+     */
     Scanner sc = null;
+
+    /**
+     * Instancia del objteto archivo que se inicializa vacia para luego ser usada.
+     */
     File archivo = null;
+
     //creamos una instancia para poder  usar la clase y sus metodos
+
+    /**
+     *Instancia del objeto materia para acceder a sus metodos en esta clase.
+     */
     Materia materia = new Materia();
+
+    /**
+     * Instancia de un objeto tipo ArrayList el cual almacenara las notas registradas en el CRUD.
+     */
     ArrayList<Materia> lista_notas = new ArrayList<>();
+
+    /**
+     * Atributo tipo String que representa el nombre de la materia el cual se usara durante el CRUD de notas.
+     */
     String nombreMateria = "";
+
+    /**
+     * Obtejo tipo ArrayList que almacena los nombres de cada uno de los estudiantes registrados en el controlador de estudiantes.
+     */
     ArrayList<String> lista_nombres = new ArrayList<>();
 
-    //lista de nombres
-
-
     //metodo que crea las notas
+
+    /**
+     * Metodo que verifica cada estudiante almacenado en lista_nombres y registra las notas
+     * registradas para dicho estudiante las cuales son requeridas por consola al usuario,
+     * calcula la definitiva del estudiante a partir de las notas introducidas y
+     * luego escribe toda la informacion en un archivo .csv.
+     * @param nombreMAteria Nombre de la materia.
+     */
     public void nota(String nombreMAteria){
         try {
             File creador = new File("src/Notas/" + nombreMateria + ".csv");
@@ -42,6 +75,11 @@ public class ScoreController {
     }
 
     //2.1 crearNotas
+
+    /**
+     * Metodo que busca los estudiantes existentes y luego pide al usuario las notas asociadas a este,
+     *luego guarda las notas en el arreglo lista_notas.
+     */
     public void crearNotas(){
         //creando lista de nombres creados
         File archivo = new File("src/estudiantes.txt");
@@ -83,6 +121,12 @@ public class ScoreController {
 
 //3.2 listarNotas
     //submetodo para buscar la lista
+
+    /**
+     * Metodo que recibe como parametro el nombre de la materia a buscar y retorna
+     * las notas de cada estudiante registradas en esta.
+     * @param nombreMateria Nombre de la materia.
+     */
     private void buscaLista(String nombreMateria){
         ArrayList<String> lista_lineas = new ArrayList<>();
         try {
@@ -105,6 +149,10 @@ public class ScoreController {
 
     }
 
+    /**
+     * Metodo que invoca al metodo de buscarLista para retornar al usuario la lista de notas de cada materia,
+     * pasando como parametro el nombre de la materia que usa el metodo buscaLista para cada materia.
+     */
     public void listarNotas(){
         String nombreMateria= "";
         while (nombreMateria==""){
@@ -136,7 +184,15 @@ public class ScoreController {
     }
 
 //3.3 buscaNotaEstudiante
-private String buscaNota(String nombreMateria, String nombreEstudiante){
+
+    /**
+     * Metodo que toma como parametros el nombre del estudiante y nombre de la materia,
+     * y retorna las notas del estudiante en esa materia.
+     * @param nombreMateria Nombre materia.
+     * @param nombreEstudiante Nombre del estudiante.
+     * @return
+     */
+    private String buscaNota(String nombreMateria, String nombreEstudiante){
         ArrayList<String> lista_lineas = new ArrayList<>();
     try {
         File archivo = new File("src/Notas/"+nombreMateria+".csv");
@@ -163,8 +219,11 @@ private String buscaNota(String nombreMateria, String nombreEstudiante){
     return nombrefinal;
 }
 
-
-public void buscaNotaEstudiante(){
+    /**
+     * Metodo que invoca al metodo buscaNota pasando los parametros de nombre de estudiante y nombre de la materia,
+     * y luego imprime al usuario las notas encontradas asociadas el nombre de estudiante.
+     */
+    public void buscaNotaEstudiante(){
         String nombreMateria="";
         String nombreBusqueda;
         String nombreEncontrado;
@@ -219,6 +278,14 @@ public void buscaNotaEstudiante(){
 
 //3.4 Modificar notas Estudiante
     //submetodo para modificar
+
+    /**
+     * Metodo que toma como parametros el nombre del estudiante y nombre de la materia,
+     * ya que su intencion es sobreescribir estas, remueve los datos de la lista si los encuentra,
+     * y los escribe guardandolos en la ultima posicion.
+     * @param nombreEstudiante Nombre del estudiante.
+     * @param nombreMateria Nombre de la materia.
+     */
     private void modificaNota(String nombreEstudiante, String nombreMateria){
         ArrayList<String> lista_de_estudiantes = new ArrayList<>();
 
@@ -268,6 +335,11 @@ public void buscaNotaEstudiante(){
     }
 
     //Metodo
+
+    /**
+     * Metodo que invoca el metodo modificaNota, pasando a este los parametros de nombre de estudiante y materia
+     * a buscar e imprime mensaje de estado del proceso al usuario en caso de exito o falla.
+     */
     public void modificarNotaEstudiante(){
         nombreMateria = "";
         String nombre;
@@ -304,6 +376,12 @@ public void buscaNotaEstudiante(){
 
 //3.5 borrarEstudiante
     //submetodo de borrarNotas
+
+    /**
+     * Metodo para borrar las notas de un estudiante.
+     * @param nombre Nombre del estudiante.
+     * @param nombreMateria Nombre de la materia.
+     */
     private void borra(String nombre, String nombreMateria){
         ArrayList<String> lista_estudiantes = new ArrayList<>();
 
@@ -338,7 +416,11 @@ public void buscaNotaEstudiante(){
         }
     }
 
-public void borraNotasEstudiante(){
+    /**
+     * Metodo que invoca al metodo borra, pasando a este los parametros de nombre de estudiante y materia,
+     * e imprime al usuario el exito o falla del proceso.
+     */
+    public void borraNotasEstudiante(){
         nombreMateria="";
         String nombre;
         while(nombreMateria == ""){
