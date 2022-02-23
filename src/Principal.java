@@ -7,6 +7,7 @@ public class Principal {
         PrincipalController controladorPrincipal = new PrincipalController();
         StudentController controladorEstudiante = new StudentController();
         ScoreController controladorNotas = new ScoreController();
+        ReportController controladorReportes = new ReportController();
         Scanner sc = new Scanner(System.in);
 
         JOptionPane.showMessageDialog(null, "Bienvenido al sistema de gestion de notas y reportes");
@@ -78,7 +79,25 @@ public class Principal {
                     }
                     break;
                 case "3":
-                    controladorPrincipal.menuReportes();
+                    boolean continua_r = true;
+                    while(continua_r){
+                        switch (controladorPrincipal.menuReportes()){
+                            case "1":
+                                controladorReportes.listaReportes();
+                                break;
+                            case "2":
+                                controladorReportes.buscaReporte();
+                                break;
+                            case "3":
+                                continua_r=false;
+                                break;
+                            case "4":
+                                System.exit(0);
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Opcion invalida");
+                        }
+                    }
                     break;
                 case "4":
                     controladorPrincipal.exit();
