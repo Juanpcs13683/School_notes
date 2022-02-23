@@ -59,8 +59,10 @@ public class Principal {
                                 controladorNotas.buscaNotaEstudiante();
                                 break;
                             case "4":
+                                controladorNotas.modificarNotaEstudiante();
                                 break;
                             case "5":
+                                controladorNotas.borraNotasEstudiante();
                                 break;
                             case "6":
                                 continua_n = false;

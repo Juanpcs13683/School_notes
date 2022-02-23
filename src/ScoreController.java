@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class ScoreController {
     Scanner sc = null;
+    File archivo = null;
     //creamos una instancia para poder  usar la clase y sus metodos
     Materia materia = new Materia();
     ArrayList<Materia> lista_notas = new ArrayList<>();
@@ -80,9 +81,9 @@ public class ScoreController {
         }
     }
 
-//2.2 listarNotas
+//3.2 listarNotas
     //submetodo para buscar la lista
-    public void buscaLista(String nombreMateria){
+    private void buscaLista(String nombreMateria){
         ArrayList<String> lista_lineas = new ArrayList<>();
         try {
             File archivo = new File("src/Notas/" +nombreMateria+".csv");
@@ -135,7 +136,7 @@ public class ScoreController {
     }
 
 //3.3 buscaNotaEstudiante
-public void buscaNota(String nombreMateria, String nombreEstudiante){
+private String buscaNota(String nombreMateria, String nombreEstudiante){
         ArrayList<String> lista_lineas = new ArrayList<>();
     try {
         File archivo = new File("src/Notas/"+nombreMateria+".csv");
@@ -148,57 +149,66 @@ public void buscaNota(String nombreMateria, String nombreEstudiante){
         lista_lineas.add(sc.nextLine());
     }
     lista_lineas.remove(0);
+    String nombrefinal = null;
     for (String nombre: lista_lineas) {
         String[] separados = nombre.split(",");
         String[] name = separados[0].split(" ");
         if(nombreEstudiante.equalsIgnoreCase(name[0])){
-            JOptionPane.showMessageDialog(null, "Materia: "+separados[1]+"\n"+
+            nombrefinal =  "Materia: "+separados[1]+"\n"+
                     "Estudiante: "+separados[0]+"\n"+"Nota 1: "+separados[2]+"\n"+
                     "Nota 2: "+separados[3]+"\n"+"Nota 3: "+separados[4]+"\n"+
-                    "Nota 4: "+separados[5]+"\n"+"Definitiva: "+separados[6]);
+                    "Nota 4: "+separados[5]+"\n"+"Definitiva: "+separados[6];
         }
     }
+    return nombrefinal;
 }
+
+
 public void buscaNotaEstudiante(){
         String nombreMateria="";
-        String nombre;
+        String nombreBusqueda;
+        String nombreEncontrado;
         switch (JOptionPane.showInputDialog(null, "Listar Notas\n"+
                 "Por favor selecione una de las siguientes materias:" +"\n"+
                 "1. Matematicas\n"+"2. Fisica"+"\n"+"3. Español\n"+"4. Sociales")){
             case "1":
                 nombreMateria = "Matematicas";
-                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
-                if(nombre.isEmpty()){
+                nombreBusqueda = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                nombreEncontrado = buscaNota(nombreMateria, nombreBusqueda);
+                if(nombreEncontrado == null){
                     JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
                 }else {
-                    buscaNota(nombreMateria, nombre);
+                    JOptionPane.showMessageDialog(null, nombreEncontrado);
                 }
                 break;
             case "2":
                 nombreMateria = "Fisica";
-                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
-                if(nombre.isEmpty()){
+                nombreBusqueda = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                nombreEncontrado = buscaNota(nombreMateria, nombreBusqueda);
+                if(nombreEncontrado == null){
                     JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
                 }else {
-                    buscaNota(nombreMateria, nombre);
+                    JOptionPane.showMessageDialog(null, nombreEncontrado);
                 }
                 break;
             case "3":
                 nombreMateria = "Español";
-                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
-                if(nombre.isEmpty()){
+                nombreBusqueda = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                nombreEncontrado = buscaNota(nombreMateria, nombreBusqueda);
+                if(nombreEncontrado == null){
                     JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
                 }else {
-                    buscaNota(nombreMateria, nombre);
+                    JOptionPane.showMessageDialog(null, nombreEncontrado);
                 }
                 break;
             case "4":
                 nombreMateria = "Sociales";
-                nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
-                if(nombre.isEmpty()){
+                nombreBusqueda = JOptionPane.showInputDialog(null, "Ingrese el nombre a buscar");
+                nombreEncontrado = buscaNota(nombreMateria, nombreBusqueda);
+                if(nombreEncontrado == null){
                     JOptionPane.showMessageDialog(null, "El nombre ingresado no se encuentra");
                 }else {
-                    buscaNota(nombreMateria, nombre);
+                    JOptionPane.showMessageDialog(null, nombreEncontrado);
                 }
                 break;
             default:
@@ -207,6 +217,157 @@ public void buscaNotaEstudiante(){
 
 }
 
+//3.4 Modificar notas Estudiante
+    //submetodo para modificar
+    private void modificaNota(String nombreEstudiante, String nombreMateria){
+        ArrayList<String> lista_de_estudiantes = new ArrayList<>();
+
+        try {
+            archivo = new File("src/Notas/"+nombreMateria+".csv");
+            sc = new Scanner(archivo);
+
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error al abrir el archivo.");
+        }
+        while(sc.hasNext()){
+            lista_de_estudiantes.add(sc.nextLine());
+        }
+        for (String estudiante:lista_de_estudiantes) {
+            if(estudiante.toLowerCase().startsWith(nombreEstudiante.toLowerCase())){
+                String[] datos_estudiante = estudiante.split(",");
+                lista_de_estudiantes.remove(estudiante);
+                PrintWriter escritor = null;
+                try {
+                    escritor = new PrintWriter(archivo);
+                    for (String linea:lista_de_estudiantes) {
+                        escritor.println(linea);
+                    }
+                    //agregamos el nuevo estudiante
+                    //solicitamos las nuevas notas
+                    String nota1 = JOptionPane.showInputDialog(null, "Ingrese las nuevas notas\n"+"Nota1: ");
+                    String nota2 = JOptionPane.showInputDialog(null, "Nota 2:");
+                    String nota3 = JOptionPane.showInputDialog(null, "Nota 3:");
+                    String nota4 = JOptionPane.showInputDialog(null, "Nota 4:");
+                    String definitiva = String.valueOf(materia.calculaDef(Integer.parseInt(nota1),
+                            Integer.parseInt(nota2), Integer.parseInt(nota3), Integer.parseInt(nota4)));
+                    escritor.println(datos_estudiante[0]+","+nombreMateria+","+nota1+","+nota2+","+nota3+","+nota4+","+definitiva);
+                    escritor.close();
+                    JOptionPane.showMessageDialog(null, "Estudiante modificado con exito\n"+
+                            "Estudiante: "+datos_estudiante[0]+"\n"+
+                            "Materia: " + datos_estudiante[1]+"\n"+
+                            "Nota 1: "+nota1+"\n"+"Nota 2: "+nota2+"\n"+"Nota 3: "+nota3+"\n"+"Nota 4: "+nota4+"\n"+
+                            "Definitiva: "+definitiva);
+                } catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(null, "Error al abrir archivo.");
+                }
 
 
+            }
+        }
+
+    }
+
+    //Metodo
+    public void modificarNotaEstudiante(){
+        nombreMateria = "";
+        String nombre;
+        while(nombreMateria == ""){
+            switch (JOptionPane.showInputDialog(null, "Listar Notas\n"+
+                    "Por favor selecione una de las siguientes materias:" +"\n"+
+                    "1. Matematicas\n"+"2. Fisica"+"\n"+"3. Español\n"+"4. Sociales")){
+                case "1":
+                    nombreMateria="Matematicas";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a modificar");
+                    modificaNota(nombre, nombreMateria);
+                    break;
+                case "2":
+                    nombreMateria="Fisica";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a modificar");
+                    modificaNota(nombre, nombreMateria);
+                    break;
+                case "3":
+                    nombreMateria="Español";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a modificar");
+                    modificaNota(nombre, nombreMateria);
+                    break;
+                case "4":
+                    nombreMateria="Sociales";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a modificar");
+                    modificaNota(nombre, nombreMateria);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Entrada invalida");
+            }
+        }
+    }
+
+
+//3.5 borrarEstudiante
+    //submetodo de borrarNotas
+    private void borra(String nombre, String nombreMateria){
+        ArrayList<String> lista_estudiantes = new ArrayList<>();
+
+        try {
+            archivo = new File("src/Notas/"+nombreMateria+".csv");
+            sc = new Scanner(archivo);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Archivo no encontrado.");
+        }
+        while(sc.hasNext()) {
+            lista_estudiantes.add(sc.nextLine());
+        }
+
+        for (String estudiante:lista_estudiantes) {
+            String[] linea_separada = estudiante.split(",");
+            String[] name = linea_separada[0].split(" ");
+            System.out.println(name[0]);
+            if(name[0].equalsIgnoreCase(nombre)){
+                lista_estudiantes.remove(estudiante);
+                try {
+                    PrintWriter escritor = new PrintWriter(archivo);
+                    for (String linea :lista_estudiantes) {
+                        escritor.println(linea);
+                    }
+                    escritor.close();
+                    break;
+                } catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(null, "Error al crear el archivo.");
+                }
+
+            }
+        }
+    }
+
+public void borraNotasEstudiante(){
+        nombreMateria="";
+        String nombre;
+        while(nombreMateria == ""){
+            switch (JOptionPane.showInputDialog(null, "Listar Notas\n"+
+                    "Por favor selecione una de las siguientes materias:" +"\n"+
+                    "1. Matematicas\n"+"2. Fisica"+"\n"+"3. Español\n"+"4. Sociales")){
+                case "1":
+                    nombreMateria="Matematicas";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a borrar.");
+                    borra(nombre, nombreMateria);
+                    break;
+                case "2":
+                    nombreMateria="Fisica";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a borrar.");
+                    borra(nombre, nombreMateria);
+                    break;
+                case "3":
+                    nombreMateria="Español";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a borrar.");
+                    borra(nombre, nombreMateria);
+                    break;
+                case "4":
+                    nombreMateria="Sociales";
+                    nombre = JOptionPane.showInputDialog(null, "Modificar Estudiante\n"+"Ingrese el Nombre del estudiante a borrar.");
+                    borra(nombre, nombreMateria);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Entrada invalida");
+            }
+        }
+}
 }
